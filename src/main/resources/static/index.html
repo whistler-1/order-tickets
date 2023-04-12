@@ -1,10 +1,170 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="no">
+<!--prøv <html lang="no" data-bs-theme="dark"> for dark mode! -->
+
+
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+		<!-- jQuery-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	
+		<!-- min JS -->
+		<script src="functions.js"></script>
+	
+		<!-- bootstrap-->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+		      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	
+	<title>Oblig 2</title>
+
 </head>
 <body>
-test
+	<!-- Hoved-Wrapper -->
+	<div class="col-lg-8 mx-auto p-4 py-md-5">
+		
+		<!-- Header -->
+		<header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+			<!-- billett ikon-->
+			<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+			     class="bi bi-ticket-perforated-fill me-2" viewBox="0 0 16 16">
+				<path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5Zm4-1v1h1v-1H4Zm1 3v-1H4v1h1Zm7 0v-1h-1v1h1Zm-1-2h1v-1h-1v1Zm-6 3H4v1h1v-1Zm7 1v-1h-1v1h1Zm-7 1H4v1h1v-1Zm7 1v-1h-1v1h1Zm-8 1v1h1v-1H4Zm7 1h1v-1h-1v1Z"/>
+			</svg>
+			
+			<h3 class="fs-4">OsloMet Kino</h3>
+		</header>
+		
+		<!-- Main -->
+		<main>
+			<h1>Velkommen!</h1>
+			<p class="fs-5 col-md-8"> Bestill Kinobiletter</p>
+			
+			<div class="mb-5">
+				<div class="row g-3">
+					
+					<!-- Dropdown med filmvalg -->
+					<div class="col-md-6 form-floating">
+						<select name="dropFilm" id="selectFilm" class="form-select"
+						        aria-label="Default select example">
+							<option selected disabled value="Default">Velg film</option>
+							<option value="Snowpocalypse">Snowpocalypse</option>
+							<option value="The Thing">The Thing</option>
+							<option value="Moon Base 9">Moon Base 9</option>
+							<option value="Ice 2 Meet U">Ice 2 Meet U</option>
+						</select>
+						<label for="selectFilm">Film</label>
+						
+						<!-- Film error  -->
+						<div class="invalid-feedback">
+							Vennligst velg en film
+						</div>
+					</div>
+					
+					<!-- Antall billett input -->
+					<div class="col-md-6">
+						<div class="form-floating mb-3">
+							<input type="number" min="1" step="1" class="form-control " id="inputAntall"
+							       placeholder="1">
+							<label for="inputAntall">Antall billetter</label>
+							
+							<!-- Antall billett error -->
+							<div class="invalid-feedback">
+								Vennligst velg antall billetter
+							</div>
+						</div>
+					</div>
+					
+					<!-- Fornavn input -->
+					<div class="col-md-6">
+						<div class="form-floating mb-3">
+							<input autocomplete="given-name" class="form-control" id="inputFornavn"
+							       placeholder="Fornavn">
+							<label for="inputFornavn">Fornavn</label>
+							
+							<!-- Fornavn error -->
+							<div class="invalid-feedback">
+								Vennligst oppgi fornavn
+							</div>
+						</div>
+					</div>
+					
+					<!-- Etternavn input -->
+					<div class="col-md-6">
+						<div class="form-floating mb-3">
+							<input autocomplete="family-name" class="form-control" id="inputEtternavn"
+							       placeholder="Etternavn">
+							<label for="inputEtternavn">Etternavn</label>
+							
+							<!-- Etternavn error -->
+							<div class="invalid-feedback">
+								Vennligst oppgi etternavn
+							</div>
+						</div>
+					</div>
+					
+					<!-- tlfnr input -->
+					<div class="row-md-6">
+						<div class="form-floating mb-3">
+							<input type="tel" autocomplete="tel" class="form-control" id="inputTelefonNr"
+							       placeholder="123-456-789">
+							<label for="inputTelefonNr">Telefonnummer</label>
+							
+							<!-- tlfnr error -->
+							<div class="invalid-feedback">
+								Vennligst oppgi telefonnummer
+							</div>
+						</div>
+					</div>
+					
+					<!-- epost input -->
+					<div class="row-md-6">
+						<div class="form-floating mb-3">
+							<input type="email" autocomplete="email" class="form-control" id="inputEpost"
+							       placeholder="name@site.com">
+							<label for="inputEpost">Epost adresse</label>
+							
+							<!-- epost error -->
+							<div class="invalid-feedback">
+								Vennligst oppgi gyldig epost
+							</div>
+						</div>
+					</div>
+					<div></div> <!-- Jeg husker ikke hvorfor jeg plasserte denne tomme diven men det-->
+				</div>        <!--har antakeligvis noe å gjøre med bootstrap sin automatisk spacing.-->
+				
+				<!-- kaller på JS funksjon som håndterer validering, sending til server, og
+				  viser billett om ingen feil er funnet-->
+				<button class="btn btn-primary" id="btnSubmit" onclick="addBestilling()">
+					Submit
+				</button>
+			</div>
+			
+			
+			<!-- Denne div'en er ansvarlig for om billett tabellen vises eller ikke.
+					 Jeg bruker jquery sine .addClass() og .removeClass() funksjoner.-->
+			<div id="showTable" class="d-none">
+				<hr class="col-3 col-md-2 mb-5">
+				<div class="row g-5">
+					
+					<h3>Alle billetter</h3>
+					<div id="alleBilletter">
+						<!-- Her blir en <table> med billetter plassert -->
+					</div>
+				</div>
+				
+				<!-- Sletter info på serveren og gjemmer tabellen -->
+				<button type="button" class="btn btn-danger" onclick="slettBestillinger()">
+					Slett alle billetter
+				</button>
+			
+			</div>
+		</main>
+		
+		<!-- credz -->
+		<footer class="pt-5 my-5 text-muted border-top">
+			Benjamin Borgen Whistler · © 2023
+		</footer>
+	</div>
 </body>
 </html>
