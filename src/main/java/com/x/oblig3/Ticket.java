@@ -1,7 +1,8 @@
 package com.x.oblig3;
 
-public class Billett {
+public class Ticket {
 
+    private int id;
     private String film;
     private String antall;
     private String fornavn;
@@ -9,7 +10,8 @@ public class Billett {
     private String telefonNr;
     private String epost;
 
-    public Billett(String film, String antall, String fornavn, String etternavn, String telefonNr, String epost) {
+    public Ticket(int id, String film, String antall, String fornavn, String etternavn, String telefonNr, String epost) {
+        this.id = id;
         this.film = film;
         this.antall = antall;
         this.fornavn = fornavn;
@@ -17,7 +19,11 @@ public class Billett {
         this.telefonNr = telefonNr;
         this.epost = epost;
     }
-    public Billett(){}
+    public Ticket(){}
+
+    public int getId() {
+        return id;
+    }
 
     public String getFilm() {
         return film;
@@ -46,7 +52,7 @@ public class Billett {
 
     @Override
     public String toString() {
-        return "Billett{" +
+        return "Ticket{" +
                 "film='" + film + '\'' +
                 ", antall=" + antall +
                 ", fornavn='" + fornavn + '\'' +

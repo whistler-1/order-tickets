@@ -18,26 +18,26 @@ function addBestilling() {
     let telefonNr = $("#inputTelefonNr");
     let epost = $("#inputEpost");
 
-    let billett = {};
+    let Ticket = {};
 
     let errors; //blir økt om en funksjon finner feil, sjekkes av en try/catch
 
-    //validerer mottatte input og legger verdien inn i billett objektet
-    function validateAndAdd(billettInput, name){
-        validate(billettInput);
-        billett[name] = billettInput.val();
+    //validerer mottatte input og legger verdien inn i Ticket objektet
+    function validateAndAdd(TicketInput, name){
+        validate(TicketInput);
+        Ticket[name] = TicketInput.val();
     }
 
     // ser etter felt som ikke er blitt fylt ut
-    function validate(billettInput) {
-        if (billettInput.val() === "Default"||
-            billettInput.val() === ""       ||
-            billettInput.val() === null     ||
-            billettInput.val() === 0        ||
-            billettInput.val() === "0" )
+    function validate(TicketInput) {
+        if (TicketInput.val() === "Default"||
+            TicketInput.val() === ""       ||
+            TicketInput.val() === null     ||
+            TicketInput.val() === 0        ||
+            TicketInput.val() === "0" )
         {
             errors++;
-            billettInput.addClass("is-invalid");
+            TicketInput.addClass("is-invalid");
             /*  bootstrap 5 sitt valideringssystem. under hver input er det en
                 <div class="invalid-feedback"> som gjemmes til vanlig, men vises
                 om elementet over har klassen "is-invalid".
@@ -69,12 +69,12 @@ function addBestilling() {
     }
 
     $.ajax({
-        url: "/setBillett",
+        url: "/setTicket",
         type: "POST",
-        data: JSON.stringify(billett), //Gjør billett objektet til JSON
+        data: JSON.stringify(Ticket), //Gjør Ticket objektet til JSON
         contentType: "application/json; charset=utf-8", //Sier til server at innholdet er JSON
         complete: function () {
-            console.log(billett);
+            console.log(Ticket);
             updateBestilling();
 
             /*                                                                       ___
@@ -86,9 +86,9 @@ function addBestilling() {
             *///                                                                   |_|
 
             // resetter feltene og feilmeldingene
-            const resetValue = function(billettInput){
-                billettInput.val("");
-                billettInput.removeClass("is-invalid");
+            const resetValue = function(TicketInput){
+                TicketInput.val("");
+                TicketInput.removeClass("is-invalid");
             }
 
             resetValue(film);
@@ -105,7 +105,7 @@ function addBestilling() {
 
 //fjern innholdet i tabellen via serveren, så kjør updateBestilling()
 function slettBestillinger() {
-    $.get("/slettBilletter", function (data) {
+    $.get("/slettTickets", function (data) {
         console.log(data)
     }).done(function (){
 
@@ -115,15 +115,15 @@ function slettBestillinger() {
 
 function updateBestilling() {
     /*
-    Denne funksjonen bruker en foreach loop for å sette verdiene i Billett
+    Denne funksjonen bruker en foreach loop for å sette verdiene i Ticket
     arrayen inn i tableMid. Tabellen legges så inn i HTML'en i tre steg,
     med tableStart, tableMid og så tableEnd for end tags.
      */
 
     let arrayEmpty;
 
-    $.get("/sjekkBilletterIsEmpty", function (bool) {
-        //sjekkBilletterIsEmpty returnerer boolean
+    $.get("/sjekkTicketsIsEmpty", function (bool) {
+        //sjekkTicketsIsEmpty returnerer boolean
         console.log(bool)
         arrayEmpty = bool;
 
@@ -136,9 +136,9 @@ function updateBestilling() {
             // med tabellen og delete knappen gjemt.
 
         } else {
-            let billettList;
-            $.get("/getAllBilletter", function (data) {
-                billettList = data;
+            let TicketList;
+            $.get("/getAllTickets", function (data) {
+                TicketList = data;
                 console.log("recieving list")
             }).done(function () {
                 //pass på at resten av koden ikke kjører før denne er ferdig
@@ -160,17 +160,17 @@ function updateBestilling() {
                 const tableEnd = "</tbody></table>";
 
 
-                for (let i = 0; i < billettList.length; i++) {
-                    console.log("adding billett # " + (i + 1));
+                for (let i = 0; i < TicketList.length; i++) {
+                    console.log("adding Ticket # " + (i + 1));
 
                     tableMiddle +=`
                       <tr> 
-                        <td> ${billettList[i].film}      </td>
-                        <td> ${billettList[i].antall}    </td>
-                        <td> ${billettList[i].fornavn}   </td>
-                        <td> ${billettList[i].etternavn} </td>
-                        <td> ${billettList[i].telefonNr} </td>
-                        <td> ${billettList[i].epost}     </td>
+                        <td> ${TicketList[i].film}      </td>
+                        <td> ${TicketList[i].antall}    </td>
+                        <td> ${TicketList[i].fornavn}   </td>
+                        <td> ${TicketList[i].etternavn} </td>
+                        <td> ${TicketList[i].telefonNr} </td>
+                        <td> ${TicketList[i].epost}     </td>
                       </tr>`;
                 }
 
@@ -182,7 +182,7 @@ function updateBestilling() {
 
                 // Sent tabell i html
                 console.log(tableFull)
-                $("#alleBilletter").html(tableFull);
+                $("#alleTickets").html(tableFull);
             })
         }
     })
