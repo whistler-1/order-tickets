@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,28 +16,39 @@ public class HomeController {
     //mottar JSON object fra JS og legger til DB 
     @PostMapping( "/setTicket")
     public void setTicket(@RequestBody Ticket ticket){
+        System.out.println(ticket);
         rep.saveTicket(ticket);
     }
 
-    //sender hele arrayen med Tickets
+    //sender hele listen med Tickets
     @GetMapping("/getAllTickets")
     public List<Ticket> getTickets(){
-        return rep.getAllTickets();
+        List<Ticket> allTickets = rep.getAllTickets();
+
+        try{
+            allTickets = rep.getAllTickets();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        System.out.println(allTickets);
+
+        return allTickets;
     }
+
 
     //Sletter alle Tickets i array
-    @GetMapping("/slettTickets")
+    @GetMapping("/deleteTickets")
     public void slettTickets(){
         rep.deleteAllTickets();
-        System.out.println("Tickets slettet");
+        System.out.println("Tickets deleted");
     }
 
-    /*Sjekker om arrayen er tom og returnerer boolean
-    @GetMapping("/sjekkTicketsIsEmpty")
+    //Sjekker om arrayen er tom og returnerer boolean
+    @GetMapping("/checkTicketsIsEmpty")
     public boolean sjekkTicketsIsEmpty(){
-        System.out.println("array empty: " + Tickets.isEmpty());
-        return Tickets.isEmpty();
+        boolean bool = rep.getAllTickets().isEmpty();
+        System.out.println(bool);
+        return bool;
     }
 
-     */
 }

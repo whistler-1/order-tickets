@@ -19,7 +19,9 @@ public class Ticket {
         this.telefonNr = telefonNr;
         this.epost = epost;
     }
+
     public Ticket(){}
+
 
     public int getId() {
         return id;
@@ -49,12 +51,40 @@ public class Ticket {
         return epost;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setFilm(String film) {
+        this.film = film;
+    }
+
+    public void setAntall(String antall) {
+        this.antall = antall;
+    }
+
+    public void setFornavn(String fornavn) {
+        this.fornavn = fornavn;
+    }
+
+    public void setEtternavn(String etternavn) {
+        this.etternavn = etternavn;
+    }
+
+    public void setTelefonNr(String telefonNr) {
+        this.telefonNr = telefonNr;
+    }
+
+    public void setEpost(String epost) {
+        this.epost = epost;
+    }
 
     @Override
     public String toString() {
         return "Ticket{" +
-                "film='" + film + '\'' +
-                ", antall=" + antall +
+                "id=" + id +
+                ", film='" + film + '\'' +
+                ", antall='" + antall + '\'' +
                 ", fornavn='" + fornavn + '\'' +
                 ", etternavn='" + etternavn + '\'' +
                 ", telefonNr='" + telefonNr + '\'' +
