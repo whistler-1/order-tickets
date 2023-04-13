@@ -105,7 +105,7 @@ function addBestilling() {
 
 //fjern innholdet i tabellen via serveren, så kjør updateBestilling()
 function slettBestillinger() {
-    $.get("/slettTickets", function (data) {
+    $.get("/deleteTickets", function (data) {
         console.log(data)
     }).done(function (){
 
@@ -122,7 +122,7 @@ function updateBestilling() {
 
     let arrayEmpty;
 
-    $.get("/sjekkTicketsIsEmpty", function (bool) {
+    $.get("/checkTicketsIsEmpty", function (bool) {
         //sjekkTicketsIsEmpty returnerer boolean
         console.log(bool)
         arrayEmpty = bool;

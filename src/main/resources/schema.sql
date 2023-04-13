@@ -1,0 +1,12 @@
+CREATE TABLE TICKET
+(
+    id INTEGER AUTO_INCREMENT NOT NULL,
+    film VARCHAR(255) NOT NULL,
+    antall VARCHAR(255) NOT NULL,
+    fornavn VARCHAR(255) NOT NULL,
+    etternavn VARCHAR(255) NOT NULL,
+    telefonNr VARCHAR(15) NOT NULL,
+    epost VARCHAR(254) NOT NULL,
+
+    PRIMARY KEY (id)
+);
